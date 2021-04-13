@@ -1,0 +1,106 @@
+# -*- coding: utf-8 -*-
+import sys
+from Get_News import Get_cloud
+from Get_News import Get_txt
+from Get_News import Get_news
+from PyQt5 import QtCore, QtGui, QtWidgets
+
+class Ui_MainWindow(object):
+    def setupUi(self, MainWindow):
+        MainWindow.setObjectName("MainWindow")
+        MainWindow.resize(1071, 712)
+        MainWindow.setMinimumSize(QtCore.QSize(1071, 712))
+        MainWindow.setMaximumSize(QtCore.QSize(1071, 712))
+        MainWindow.setAutoFillBackground(False)
+        self.centralwidget = QtWidgets.QWidget(MainWindow)
+        self.centralwidget.setObjectName("centralwidget")
+        self.Title = QtWidgets.QLabel(self.centralwidget)
+        self.Title.setGeometry(QtCore.QRect(300, 0, 451, 81))
+        font = QtGui.QFont()
+        font.setFamily("华文行楷")
+        self.Title.setFont(font)
+        self.Title.setObjectName("Title")
+        self.Back_ground = QtWidgets.QLabel(self.centralwidget)
+        self.Back_ground.setGeometry(QtCore.QRect(-50, -10, 1151, 751))
+        self.Back_ground.setText("")
+        self.Back_ground.setPixmap(QtGui.QPixmap("9408.jpg"))
+        self.Back_ground.setObjectName("Back_ground")
+        self.Check = QtWidgets.QPushButton(self.centralwidget)
+        self.Check.setGeometry(QtCore.QRect(490, 120, 211, 61))
+        self.Check.setStyleSheet("font: 20pt \"Agency FB\";")
+        self.Check.setObjectName("Check")
+        self.Printf = QtWidgets.QLabel(self.centralwidget)
+        self.Printf.setGeometry(QtCore.QRect(30, 240, 671, 400))
+        self.Printf.setMinimumSize(QtCore.QSize(671, 400))
+        self.Printf.setMaximumSize(QtCore.QSize(671, 400))
+        self.Printf.setText("")
+        self.Printf.setObjectName("Printf")
+        self.comboBox = QtWidgets.QComboBox(self.centralwidget)
+        self.comboBox.setGeometry(QtCore.QRect(310, 120, 161, 61))
+        self.comboBox.setStyleSheet("font: 25 18pt \"Bahnschrift Light SemiCondensed\";")
+        self.comboBox.setObjectName("comboBox")
+        self.comboBox.addItem("")
+        self.comboBox.addItem("")
+        self.comboBox.addItem("")
+        self.comboBox.addItem("")
+        self.comboBox.addItem("")
+        self.comboBox.addItem("")
+        self.comboBox.addItem("")
+        self.comboBox.addItem("")
+        self.comboBox.addItem("")
+        self.comboBox.addItem("")
+        self.comboBox.addItem("")
+        self.comboBox.addItem("")
+        self.comboBox.addItem("")
+        self.comboBox.addItem("")
+        self.Remind = QtWidgets.QLabel(self.centralwidget)
+        self.Remind.setGeometry(QtCore.QRect(20, 120, 291, 61))
+        self.Remind.setObjectName("Remind")
+        self.Back_ground.raise_()
+        self.Title.raise_()
+        self.Check.raise_()
+        self.comboBox.raise_()
+        self.Remind.raise_()
+        self.Printf.raise_()
+        MainWindow.setCentralWidget(self.centralwidget)
+
+        self.retranslateUi(MainWindow)
+        QtCore.QMetaObject.connectSlotsByName(MainWindow)
+
+        self.Check.clicked.connect(self.printf)
+
+
+    def printf(self):
+        dict = self.comboBox.currentText()
+        Get_cloud(Get_txt(Get_news(dict)))
+        self.Printf.setPixmap(QtGui.QPixmap("cloud.png"))
+
+    def retranslateUi(self, MainWindow):
+        _translate = QtCore.QCoreApplication.translate
+        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        self.Title.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:"
+                                "36pt; font-weight:600; color:#284e78;\">Python 热词分析</span></p></body></html>"))
+        self.Check.setText(_translate("MainWindow", "查询"))
+        self.comboBox.setItemText(0, _translate("MainWindow", "百度"))
+        self.comboBox.setItemText(1, _translate("MainWindow", "网易"))
+        self.comboBox.setItemText(2, _translate("MainWindow", "新浪"))
+        self.comboBox.setItemText(3, _translate("MainWindow", "腾讯"))
+        self.comboBox.setItemText(4, _translate("MainWindow", "人民网"))
+        self.comboBox.setItemText(5, _translate("MainWindow", "新京报"))
+        self.comboBox.setItemText(6, _translate("MainWindow", "搜狗"))
+        self.comboBox.setItemText(7, _translate("MainWindow", "今日头条"))
+        self.comboBox.setItemText(8, _translate("MainWindow", "观察者"))
+        self.comboBox.setItemText(9, _translate("MainWindow", "CCTV国际"))
+        self.comboBox.setItemText(10, _translate("MainWindow", "百度今日"))
+        self.comboBox.setItemText(11, _translate("MainWindow", "澎湃"))
+        self.comboBox.setItemText(12, _translate("MainWindow", "知乎"))
+        self.comboBox.setItemText(13, _translate("MainWindow", "微博"))
+        self.Remind.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:"
+                                                     "16pt;\">选择要进行分析的网站：</span></p></body></html>"))
+if __name__ == '__main__':
+    app = QtWidgets.QApplication(sys.argv)
+    mainWindow = QtWidgets.QMainWindow()
+    ui = Ui_MainWindow()
+    ui.setupUi(mainWindow)
+    mainWindow.show()
+    sys.exit(app.exec_())
